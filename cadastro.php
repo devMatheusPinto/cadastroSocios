@@ -5,6 +5,7 @@
     <link rel="stylesheet" text="text/css" href="estilo.css">
 </head>
 <body>
+
 <?php
 require ("config.php");
 ?>
@@ -27,29 +28,16 @@ $estadocivil = $_POST['estadocivil'];
 $email = $_POST['email'];
 $telefone = $_POST['telefone'];
 
-$sql = "INSERT INTO socios (nip, inscricao, data, posto, nome, ativa, om, 
-                        endereco, naturalidade, datanasc, estadocivil, email, telefone) 
-        
-        VALUES (:nip, :inscricao, :data, :posto, :nome, :ativa, :om, 
-                        :endereco, :naturalidade, :datanasc, :estadocivil, :email, :telefone)
+$sql = "INSERT INTO socios (nip, nome, email)
+        VALUES (:nip, :nome, :email)
 ";
 
 $stmt = $conexao->prepare($sql);
 
 $params = array(
     ':nip' => $nip,
-    ':inscricao' => $inscricao,
-    ':data' => $data,
-    ':posto' => $posto,
     ':nome' => $nome,
-    ':ativa' => $ativa,
-    ':om' => $om, 
-    ':endereco' => $endereco,
-    ':naturalidade' => $naturalidade,
-    ':datanasc' => $datanasc,
-    ':estadocivil' => $estadocivil,
-    ':email' => $email,
-    ':telefone' => $telefone
+    ':email' => $email
 );
 
 $stmt->execute($params);
@@ -57,8 +45,9 @@ $stmt->execute($params);
 echo "<script>
           alert('Funcionário cadastrado com sucesso.');
       </script>
-      <meta http-equiv='refresh' content='0, url=funcionarios.php'>
+      <meta http-equiv='refresh' content='0, url=socios.php'>
 ";
 ?>
+
 </body>
 </html>
